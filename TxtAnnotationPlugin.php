@@ -15,10 +15,11 @@ class TxtAnnotationPlugin extends Omeka_Plugin_AbstractPlugin
 
 	public function hookPublicHead($args)
     {
-        queue_js_url('http://assets.annotateit.org/annotator/v1.2.10/annotator.min.js');
+        queue_js_url('http://assets.annotateit.org/annotator/v1.2.10/annotator-full.min.js');
         queue_js_string("
             jQuery(function ($) {
-            $('#content').annotator();
+            $('#content').annotator()
+            .annotator('setupPlugins');;
             });
             ");
         queue_css_url('http://assets.annotateit.org/annotator/v1.2.10/annotator.min.css');
