@@ -19,10 +19,13 @@ class TxtAnnotationPlugin extends Omeka_Plugin_AbstractPlugin
         queue_js_string("
             jQuery(function ($) {
             $('#content').annotator()
-            .annotator('setupPlugins');;
+            .annotator('setupPlugins')
+            .annotator('addPlugin', 'AnnotoriousImagePlugin');
             });
             ");
+        queue_js_file('annotorious.okfn.0.3');
         queue_css_url('http://assets.annotateit.org/annotator/v1.2.10/annotator.min.css');
+        queue_css_file('annotorious');
     }
 }
 
