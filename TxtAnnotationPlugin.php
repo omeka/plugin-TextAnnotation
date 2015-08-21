@@ -13,6 +13,8 @@ class TxtAnnotationPlugin extends Omeka_Plugin_AbstractPlugin
 {
 	protected $_hooks = array('public_head');
 
+    protected $_filters = array('file_markup');
+
 	public function hookPublicHead($args)
     {
         queue_js_url('http://assets.annotateit.org/annotator/v1.2.10/annotator-full.min.js');
@@ -26,6 +28,17 @@ class TxtAnnotationPlugin extends Omeka_Plugin_AbstractPlugin
         queue_js_file('annotorious.okfn.0.3');
         queue_css_url('http://assets.annotateit.org/annotator/v1.2.10/annotator.min.css');
         queue_css_file('annotorious');
+    }
+
+    public function filterFileMarkup($html, $args)
+    {   
+        $file = $args['file'];
+        $options = $args['options'];
+        if(!$options['linkToFile'] == false) {
+            $options['linkToFile'] = false;
+            $html =  file_markup($file, $options);
+        }     
+        return $html;
     }
 }
 
