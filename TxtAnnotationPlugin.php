@@ -17,7 +17,11 @@ class TxtAnnotationPlugin extends Omeka_Plugin_AbstractPlugin
 
 	public function hookPublicHead($args)
     {
-        queue_js_url('http://assets.annotateit.org/annotator/v1.2.10/annotator-full.min.js');
+        queue_css_url('http://assets.annotateit.org/annotator/v1.2.5/annotator.min.css');
+        queue_css_file('annotorious');
+        queue_js_url('http://code.jquery.com/jquery-1.7.min.js');
+        queue_js_url('http://assets.annotateit.org/annotator/v1.2.5/annotator-full.min.js');
+        queue_js_file('annotorious.okfn.0.3');
         queue_js_string("
             jQuery(function ($) {
             $('#content').annotator()
@@ -25,16 +29,13 @@ class TxtAnnotationPlugin extends Omeka_Plugin_AbstractPlugin
             .annotator('addPlugin', 'AnnotoriousImagePlugin');
             });
             ");
-        queue_js_file('annotorious.okfn.0.3');
-        queue_css_url('http://assets.annotateit.org/annotator/v1.2.10/annotator.min.css');
-        queue_css_file('annotorious');
     }
 
     public function filterFileMarkup($html, $args)
     {   
         $file = $args['file'];
         $options = $args['options'];
-        if(!$options['linkToFile'] == false) {
+        if($options['linkToFile']) {
             $options['linkToFile'] = false;
             $html =  file_markup($file, $options);
         }     
