@@ -13,23 +13,37 @@ class TxtAnnotationPlugin extends Omeka_Plugin_AbstractPlugin
 {
 	protected $_hooks = array('public_head');
 
-    protected $_filters = array('file_markup');
+    protected $_filters = array('file_markup', 'api_resources');
 
 	public function hookPublicHead($args)
     {
-        queue_css_url('http://assets.annotateit.org/annotator/v1.2.5/annotator.min.css');
-        queue_css_file('annotorious');
-        queue_js_url('http://code.jquery.com/jquery-1.7.min.js');
-        queue_js_url('http://assets.annotateit.org/annotator/v1.2.5/annotator-full.min.js');
-        queue_js_file('annotorious.okfn.0.3');
-        queue_js_string("
-            jQuery(function ($) {
-            $('#content').annotator()
-            .annotator('setupPlugins')
-            .annotator('addPlugin', 'AnnotoriousImagePlugin');
-            });
-            ");
+        queue_js_file(array('annotator.min', 'omeka-annotator'));
     }
+
+    public function filterApiResources($apiResources)
+    {
+        // For the resource URI: /api/your_resources/[:id]
+        $apiResources['annotator'] = array(
+            // Module associated with your resource.
+            'module' => 'TxtAnnotationPlugin',
+            // Controller associated with your resource.
+            'controller' => 'your-resource-controller',
+            // Type of record associated with your resource.
+            'record_type' => 'TxtAnnotationAnnotation',
+            // List of actions available for your resource.
+            'actions' => array(
+                'index',  // GET request without ID
+                'get',    // GET request with ID
+                'post',   // POST request
+                'put',    // PUT request (ID is required)
+                'delete', // DELETE request (ID is required)
+            ),
+            // List of GET parameters available for your index action.
+            'index_params' => array('foo', 'bar'),
+        );
+        return $apiResources;
+    }
+
 
     public function filterFileMarkup($html, $args)
     {   
