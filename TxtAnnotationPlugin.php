@@ -24,21 +24,17 @@ class TxtAnnotationPlugin extends Omeka_Plugin_AbstractPlugin
     {
         // For the resource URI: /api/your_resources/[:id]
         $apiResources['annotator'] = array(
-            // Module associated with your resource.
-            'module' => 'TxtAnnotationPlugin',
-            // Controller associated with your resource.
-            'controller' => 'your-resource-controller',
-            // Type of record associated with your resource.
-            'record_type' => 'TxtAnnotationAnnotation',
-            // List of actions available for your resource.
+
+            'record_type' => 'Annotation',
+
             'actions' => array(
-                'index',  // GET request without ID
-                'get',    // GET request with ID
-                'post',   // POST request
-                'put',    // PUT request (ID is required)
-                'delete', // DELETE request (ID is required)
+                'index',
+                'get',
+                'post',
+                'put',
+                'delete',
             ),
-            // List of GET parameters available for your index action.
+
             'index_params' => array('foo', 'bar'),
         );
         return $apiResources;
