@@ -8,7 +8,5 @@
         ); ?></p>
         <?php echo get_view()->formRadio('txt_annotation_service', get_option('txt_annotation_service'), array('class' => 'radio'),
         array(1 => 'Hypothes.is', 2 => 'Annotator.org' )); ?>
-
-        <?php echo get_option('txt_annotation_service'); ?>
     </div>
 </div>
