@@ -10,7 +10,7 @@
 class TxtAnnotationPlugin extends Omeka_Plugin_AbstractPlugin
 {
     protected $_hooks = array('public_head', 'config_form', 'config');
-    protected $_filters = array('file_markup');
+
     public function hookPublicHead($args)
     {   
         if (get_option('txt_annotation_service') == 1) {
