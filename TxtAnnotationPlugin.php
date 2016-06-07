@@ -29,16 +29,7 @@ class TxtAnnotationPlugin extends Omeka_Plugin_AbstractPlugin
         }
         
     }
-    public function filterFileMarkup($html, $args)
-    {   
-        $file = $args['file'];
-        $options = $args['options'];
-        if(!$options['linkToFile'] == false) {
-            $options['linkToFile'] = false;
-            $html =  file_markup($file, $options);
-        }     
-        return $html;
-    }
+
     /**
      * Display the plugin config form.
      */
