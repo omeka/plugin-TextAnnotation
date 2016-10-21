@@ -7,13 +7,13 @@
 /**
  * Text Annotation Plugin
  */
-class TxtAnnotationPlugin extends Omeka_Plugin_AbstractPlugin
+class TextAnnotationPlugin extends Omeka_Plugin_AbstractPlugin
 {
     protected $_hooks = array('public_head', 'config_form', 'config');
 
     public function hookPublicHead($args)
     {   
-        if (get_option('txt_annotation_service') == 1) {
+        if (get_option('text_annotation_service') == 1) {
             queue_js_url('https://hypothes.is/embed.js');
         }
         else {
@@ -43,6 +43,6 @@ class TxtAnnotationPlugin extends Omeka_Plugin_AbstractPlugin
      */
     public function hookConfig($args)
     {
-        set_option('txt_annotation_service', (int)$_POST['txt_annotation_service']);
+        set_option('text_annotation_service', (int)$_POST['text_annotation_service']);
     }
 }
