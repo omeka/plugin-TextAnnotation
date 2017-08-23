@@ -13,36 +13,6 @@ class TextAnnotationPlugin extends Omeka_Plugin_AbstractPlugin
 
     public function hookPublicHead($args)
     {   
-        if (get_option('text_annotation_service') == 1) {
-            queue_js_url('https://hypothes.is/embed.js');
-        }
-        else {
-            queue_js_url('http://assets.annotateit.org/annotator/v1.2.10/annotator-full.min.js');
-            
-            queue_js_string("
-                jQuery(function ($) {
-                $('#content').annotator()
-                .annotator('setupPlugins')
-                });
-                ");
-            queue_css_url('http://assets.annotateit.org/annotator/v1.2.10/annotator.min.css');
-        }
+        queue_js_url('https://hypothes.is/embed.js');
         
     }
-
-    /**
-     * Display the plugin config form.
-     */
-    public function hookConfigForm()
-    {
-        include 'config_form.php';
-    }
-
-    /**
-     * Set the options from the config form input.
-     */
-    public function hookConfig($args)
-    {
-        set_option('text_annotation_service', (int)$_POST['text_annotation_service']);
-    }
-}
