@@ -9,10 +9,11 @@
  */
 class TextAnnotationPlugin extends Omeka_Plugin_AbstractPlugin
 {
-    protected $_hooks = array('public_head', 'config_form', 'config');
+    protected $_hooks = array('public_head');
 
     public function hookPublicHead($args)
     {   
         queue_js_url('https://hypothes.is/embed.js');
         
     }
+}
